@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule} from '@angular/http';
 
-
 import { AppComponent } from './app.component';
+import {RedditSearchServiceService} from './reddit-search-service.service';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpModule
   ],
-  providers: [],
+  providers: [RedditSearchServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
