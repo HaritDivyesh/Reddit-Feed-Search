@@ -14,8 +14,8 @@ private response: any;
 
   constructor(private http: Http) { }
 
-  public searchSubreddit(srname):Observable<any>{
-        return this.http.get("https://www.reddit.com/r/"+srname+"/top/.json?limit=10")
+  public searchSubreddit(numposts, srname):Observable<any>{
+        return this.http.get("https://www.reddit.com/r/"+srname+"/top/.json?limit="+numposts)
         .do(data=>{
           this.response = data.json();
           //console.log("In service:", this.response);

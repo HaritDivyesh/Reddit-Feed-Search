@@ -13,23 +13,29 @@ export class AppComponent {
   title = 'app';
   private subreddit: string;
   private response: Response[];
-  private id: any;
+  private id: number;
   private all_records: any = [];
   private record: any = [];
-  private raw_created: any;
+  private raw_created: number;
   private created_at_date: any;
-  private raw_edited: any;
+  private raw_edited: number;
   private edited_at_date: any;
   public is_error: Boolean = false;
+  public random_numposts: any[] = [5,10,15,20]
+  public random_srname: string[] = ['funny', 'news', 'politics', 'soccer', 'music', 'movies', 'videos', 'aww', 'food', 'askreddit',
+                                     'science', 'todayilearned'];
+  public isClicked: Boolean = false;
+  public chosen_numposts: number;
+  public chosen_srname: string;
 
   constructor(
   	private http: Http,
   	private redditService:RedditSearchServiceService) {
   }
 
-  public searchsubreddit(srname){
+  public searchsubreddit(numposts, srname){
   	this.subreddit = srname;
-  	this.redditService.searchSubreddit(this.subreddit).subscribe(data => {
+  	this.redditService.searchSubreddit(numposts, this.subreddit).subscribe(data => {
       this.response = data.json();
       //console.log("In searchsubreddit:", this.response);
       this.handleResponse(this.response, this.is_error);
@@ -40,6 +46,15 @@ export class AppComponent {
 
 }
 
+  public searchrandom(){
+    this.chosen_numposts = this.random_numposts[Math.floor(Math.random() * this.random_numposts.length)];
+    this.chosen_srname = this.random_srname[Math.floor(Math.random() * this.random_srname.length)];
+    this.isClicked = true;
+    console.log(this.isClicked);
+    this.searchsubreddit(this.chosen_numposts, this.chosen_srname);
+  }
+
+
 	public handleResponse(temp_response, temp_is_error){
     this.all_records = [];
     this.record = [];
@@ -49,9 +64,11 @@ export class AppComponent {
   	}
     //this.response.data = temp_response;
 		//console.log("Response:",this.response.data);
+    //console.log(temp_response);
 		for (this.id = 0; this.id < temp_response.data.children.length; this.id++){
 				this.record = temp_response.data.children[this.id].data;
-        if (this.record.thumbnail === "" || this.record.thumbnail === "self"){
+        if (this.record.thumbnail === "" || this.record.thumbnail === "self" || this.record.thumbnail === "default"
+          || this.record.thumbnail === "spoiler" || this.record.thumbnail === "nsfw"){
           this.record.thumbnail = "../assets/reddit_thumbnail_2.png"
         }
         this.raw_created = this.record.created;

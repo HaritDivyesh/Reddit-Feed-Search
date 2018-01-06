@@ -10,5 +10,19 @@
 
 .move-span-up {
 	position: relative;
-	bottom: 1px;
+	bottom: 2px;
+}
+
+.top-posts{
+	border-bottom: 5px solid #ff4500;
+}
+
+.customize-fields{
+	width: 200px;
+	display: inline-block;
+}
+
+.default-posts{
+	width: 200px;
+	display: inline-block;
 }

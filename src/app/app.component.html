@@ -4,32 +4,67 @@
     <br/><br/>
     <img src="assets/reddit_thumbnail.png" width="150" height="150">
     <br/><h1>
-      The Reddit Feed Web App
-    </h1>
-    <h3>Search by a subreddit name, and we will give you its top posts.</h3>
-  </div><br/>
-  <form class="input-form">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Subreddit Name" #srname />
-      <button (click)="searchsubreddit(srname.value)" class="btn btn-primary btn-block lookup-button">Look up</button>
-    </div>
-  </form>
-    <div *ngIf = "all_records.length>0" class="list-group">
-            <a href = "#" class = "list-group-item active result-header">
-                <h4 class = "list-group-item-heading">
-                    Search results
-                </h4>
-            </a>
-      <div *ngFor = "let record of all_records">
-              <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                     <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
-                      <h3 class="mb-1">{{record.title}}</h3>
-                      <p><small>Created at {{record.created_at}}, by {{record.author}}</small></p>
-                      <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span> <b> {{record.score}}&nbsp;&nbsp;</b>
-                      <span class="fa fa-comment-o"></span><b> {{record.comments}}</b>
-                  </div>
-              </a>
-          </div><br/>
+      Reddit Feed Search
+    </h1><hr>
   </div>
+  <div>
+    <div class="col-xs-4">
+      <form class="input-form">
+        <div class="form-group col-xs-12" style="text-align:center">
+          <h3>Customize my search!</h3>
+          <select name="Number of posts" class="customize-fields" #numposts>
+            <option selected disabled>Number of posts</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+          <br/><br/><input type="text" class="form-control customize-fields" placeholder="Subreddit Name" #srname />
+          <button type="button" (click)="searchsubreddit(numposts.value, srname.value)" class="btn btn-primary btn-block lookup-button customize-fields"><span><i class="fa fa-search" aria-hidden="true"></i></span> Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form class="input-form">
+        <div class="form-group col-xs-12" style="text-align:center">
+          <h3> Choose any one:</h3>
+          <button type="button" (click)="searchsubreddit(10,'funny')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-smile-o" aria-hidden="true"></i></span> Funny</button>
+          <button type="button" (click)="searchsubreddit(10, 'music')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-music" aria-hidden="true"></i></span> Music</button>
+          <button type="button" (click)="searchsubreddit(10, 'movies')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-film" aria-hidden="true"></i></span> Movies</button>
+          <button type="button" (click)="searchsubreddit(10, 'news')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> News</button>
+          <button type="button" (click)="searchsubreddit(10, 'videos')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-file-video-o" aria-hidden="true"></i></span> Videos</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-4">
+      <form class="input-form">
+        <div class="form-group col-xs-12" style="text-align:center">
+          <h3> Randomize my search!</h3>
+            <button type="button" (click)="searchrandom()" class="btn btn-primary btn-block lookup-button default-posts">
+              <i class="fa fa-cog fa-spin -o fa-fw"></i><span class="sr-only"></span> Randomize!</button><br/><br/>
+              <h4 *ngIf="isClicked">Posts: {{chosen_numposts}}</h4>
+              <h4 *ngIf="isClicked">Subreddit: {{chosen_srname}}</h4>
+        </div>
+      </form>
+    </div><hr>
+</div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <hr><div *ngIf = "all_records.length>0" class="list-group">
+          <a href = "#" class = "list-group-item active result-header">
+              <h4 class = "list-group-item-heading">
+                  Search results
+              </h4>
+          </a>
+    <div *ngFor = "let record of all_records" class="top-posts">
+          <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                 <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
+                  <h3 class="mb-1">{{record.title}}</h3>
+                  <p><small>Created on {{record.created_at}}, by {{record.author}}</small></p>
+                  <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span><b> {{record.score}}&nbsp;&nbsp;</b>
+                  <span class="fa fa-comment-o"></span><b> {{record.comments}}</b>
+              </div>
+          </a>
+      </div><br/>
+    </div>
 </div><br/>
