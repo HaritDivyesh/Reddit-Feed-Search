@@ -22,7 +22,7 @@ export class AppComponent {
   private edited_at_date: any;
   public is_error: Boolean = false;
   public random_numposts: any[] = [5,10,15,20]
-  public random_srname: string[] = ['funny', 'news', 'politics', 'soccer', 'music', 'movies', 'videos', 'aww', 'food', 'askreddit',
+  public random_srname: string[] = ['funny', 'news', 'pics', 'soccer', 'music', 'movies', 'videos', 'aww', 'food', 'askreddit',
                                      'science', 'todayilearned'];
   public isClicked: Boolean = false;
   public chosen_numposts: number;
@@ -58,13 +58,10 @@ export class AppComponent {
 	public handleResponse(temp_response, temp_is_error){
     this.all_records = [];
     this.record = [];
-  	if (temp_is_error === true){
-  		console.log("Couldn't find it");
+  	if (this.is_error){
       return;
   	}
-    //this.response.data = temp_response;
-		//console.log("Response:",this.response.data);
-    //console.log(temp_response);
+   
 		for (this.id = 0; this.id < temp_response.data.children.length; this.id++){
 				this.record = temp_response.data.children[this.id].data;
         if (this.record.thumbnail === "" || this.record.thumbnail === "self" || this.record.thumbnail === "default"
@@ -88,9 +85,7 @@ export class AppComponent {
             'comments': this.record.num_comments
         };
         this.all_records.push(this.record);
-        //console.log("Record #",this.id+1,":",this.record);
 	}
-    //console.log(this.all_records);
 	}
 }
 

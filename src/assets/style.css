@@ -19,7 +19,11 @@
 
 .customize-fields{
 	width: 200px;
-	display: inline-block;
+	display: inline;
+}
+
+#srname{
+	margin-top: 5px;
 }
 
 .default-posts{
