@@ -22,7 +22,7 @@ private response: any;
         });
   }
 
-  private handleError(err, is_error) {
+  public handleError(err, is_error) {
     console.error("Error is:", err);
     is_error = true;
     return is_error;

@@ -7,3 +7,8 @@
 	display: block;
     margin: 0 auto;
 }
+
+.move-span-up {
+	position: relative;
+	bottom: 1px;
+}

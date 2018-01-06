@@ -8,10 +8,13 @@
     </h1>
     <h3>Search by a subreddit name, and we will give you its top posts.</h3>
   </div><br/>
-    <input type="text" class="form-control" placeholder="Subreddit Name" #srname />
-    <button (click)="searchsubreddit(srname.value)" class="btn btn-primary btn-block lookup-button">Look up</button>
-
-    <br/><div *ngIf = "all_records.length>0" class="list-group">
+  <form class="input-form">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Subreddit Name" #srname />
+      <button (click)="searchsubreddit(srname.value)" class="btn btn-primary btn-block lookup-button">Look up</button>
+    </div>
+  </form>
+    <div *ngIf = "all_records.length>0" class="list-group">
             <a href = "#" class = "list-group-item active result-header">
                 <h4 class = "list-group-item-heading">
                     Search results
@@ -22,11 +25,9 @@
                   <div class="d-flex w-100 justify-content-between">
                      <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
                       <h3 class="mb-1">{{record.title}}</h3>
-                      <!--<p class="mb-1">{{record.text.substr(0, 300)+'.....'}}</p>-->
-                      <p><small>Poster: {{record.author}}</small></p>
-                      <p><small>Created: {{record.created_at}}</small></p>
-                      <span class="glyphicon glyphicon-thumbs-up ups"></span> {{record.score}}
-                      <span class="glyphicon glyphicon-comment comments"></span> {{record.comments}}
+                      <p><small>Created at {{record.created_at}}, by {{record.author}}</small></p>
+                      <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span> <b> {{record.score}}&nbsp;&nbsp;</b>
+                      <span class="fa fa-comment-o"></span><b> {{record.comments}}</b>
                   </div>
               </a>
           </div><br/>
