@@ -1,8 +1,13 @@
 
-<div style="text-align:center">
-  <br/><br/><h1>
-    Welcome to the Reddit Feed Web App!
-  </h1>
-  
-
-
+<div class="container">
+  <div style="text-align:center">
+    <br/><br/>
+    <img src="assets/reddit.png" width="150" height="150">
+    <br/><h1>
+      The Reddit Feed Web App
+    </h1>
+    <h3>Search by a subreddit name, and we will give you its top results.</h3>
+  </div><br/>
+    <input type="text" class="form-control" placeholder="Subreddit Name" #srname />
+    <button (click)="searchsubreddit(srname.value)" class="btn btn-primary btn-block lookup-button">Look up</button>
+</div>
