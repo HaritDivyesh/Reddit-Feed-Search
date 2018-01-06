@@ -14,8 +14,8 @@ export class AppComponent {
   private subreddit: string;
   private response: Response[];
   private id: number;
-  private all_records: any = [];
-  private record: any = [];
+  public all_records: any = [];
+  public record: any = [];
   private raw_created: number;
   private created_at_date: any;
   private raw_edited: number;
