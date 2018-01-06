@@ -2,3 +2,8 @@
 .lookup-button{
 	margin-top: 5px;
 }
+
+.center-my-img{
+	display: block;
+    margin: 0 auto;
+}

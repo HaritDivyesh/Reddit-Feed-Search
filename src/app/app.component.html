@@ -2,7 +2,7 @@
 <div class="container">
   <div style="text-align:center">
     <br/><br/>
-    <img src="assets/reddit.png" width="150" height="150">
+    <img src="assets/reddit_thumbnail.png" width="150" height="150">
     <br/><h1>
       The Reddit Feed Web App
     </h1>
@@ -10,4 +10,25 @@
   </div><br/>
     <input type="text" class="form-control" placeholder="Subreddit Name" #srname />
     <button (click)="searchsubreddit(srname.value)" class="btn btn-primary btn-block lookup-button">Look up</button>
-</div>
+
+    <br/><div *ngIf = "all_records.length>0" class="list-group">
+            <a href = "#" class = "list-group-item active result-header">
+                <h4 class = "list-group-item-heading">
+                    Search results
+                </h4>
+            </a>
+      <div *ngFor = "let record of all_records">
+              <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                     <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
+                      <h3 class="mb-1">{{record.title}}</h3>
+                      <!--<p class="mb-1">{{record.text.substr(0, 300)+'.....'}}</p>-->
+                      <p><small>Poster: {{record.author}}</small></p>
+                      <p><small>Created: {{record.created_at}}</small></p>
+                      <span class="glyphicon glyphicon-thumbs-up ups"></span> {{record.score}}
+                      <span class="glyphicon glyphicon-comment comments"></span> {{record.comments}}
+                  </div>
+              </a>
+          </div><br/>
+  </div>
+</div><br/>
