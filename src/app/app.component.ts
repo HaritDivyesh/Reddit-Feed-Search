@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http'; //for HTTP requests
+import { Http, Headers, RequestOptions, Response } from '@angular/http'; //for HTTP requests
 import 'rxjs/add/operator/toPromise'; //for resolving responses
 import 'rxjs/add/operator/map';
 import {RedditSearchServiceService} from './reddit-search-service.service';
@@ -12,8 +12,13 @@ import {RedditSearchServiceService} from './reddit-search-service.service';
 export class AppComponent {
   title = 'app';
   private subreddit: string;
-  private response: any[];
-  private record: any[];
+  private response: Response[];
+  private id: int;
+  private record: any = [];
+  private raw_created: any;
+  private created_at_date: any;
+  private raw_edited: any;
+  private edited_at_date: any;
 
   constructor(
   	private http: Http,
@@ -27,38 +32,34 @@ export class AppComponent {
   public searchsubreddit(srname){
   	this.subreddit = srname;
   	this.redditService.searchSubreddit(this.subreddit).subscribe(data => {
-      this.response = data;
-    }, error => console.log(error));
+      this.response = data.json();
+      //console.log("In searchsubreddit:", this.response);
+      this.handleResponse(this.response.data);
+    }, error => console.log("ERROR:",error));
 
-  console.log("MY RESPONSE:", this.response);
+}
 
-  	/* var search_url = "https://www.reddit.com/search.json?q="+this.subreddit+"&sort=top&limit=10";
-  	 this.http.get(search_url)
-  	  .map((data:any) => {
-                console.log("IN MAP:",data.json());
-                data.json();
-            }).subscribe(
-            (data: any) => {
-            	this.response = data;
-            },
-            err => console.log(err)
-            );
+	public handleResponse(this.response.data){
+		for (this.id = 0; this.id < this.response.data.children.length; this.id++){
+				this.record = this.response.data.children[this.id].data;
+                this.raw_created = this.record.created;
+                this.created_at_date = new Date(0);
+                this.created_at_date.setUTCSeconds(this.raw_created);
 
-  	console.log("Response:"+this.response);
-  	console.log("Data:"+this.response.data);
-  	*/
+                this.raw_edited = this.record.edited;
+                this.edited_at_date = new Date(0);
+                this.edited_at_date.setUTCSeconds(this.raw_edited);
 
-  	/*console.log("Data:"+this.response.data.data.children)
-  	
-  	for (s in this.response.data.data.children){
-  				this.record = this.response.data.data.children[s].data;
-                console.log(this.record.title);
-                console.log(this.record.created);
-                console.log(this.record.edited);
-                console.log(this.record.url);
-                console.log(this.record.selftext);
-                console.log(this.record.num_comments);
-  }
-  */
+                this.record = {'title':this.record.title,
+                    'url': this.record.url,
+                    'author': this.record.author,
+                    'date_created': this.created_at_date.toDateString(),
+                    'last_edited':this.edited_at_date.toDateString(),
+                    'thumbnail': this.record.thumbnail,
+                    'score': this.record.score,
+                    'num_comments': this.record.num_comments
+                };
+                console.log("Record #",this.id+1,":",this.record);
+	}
 }
 }
