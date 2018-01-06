@@ -19,27 +19,31 @@ export class AppComponent {
   private created_at_date: any;
   private raw_edited: any;
   private edited_at_date: any;
+  public is_error: Boolean = false;
 
   constructor(
   	private http: Http,
   	private redditService:RedditSearchServiceService) {
   }
 
-  public handleError(error) {
- 	console.log(error);
-}
-
   public searchsubreddit(srname){
   	this.subreddit = srname;
   	this.redditService.searchSubreddit(this.subreddit).subscribe(data => {
       this.response = data.json();
       //console.log("In searchsubreddit:", this.response);
-      this.handleResponse(this.response.data);
-    }, error => console.log("ERROR:",error));
+      this.handleResponse(this.response.data, this.is_error);
+    }, error => {(
+    	this.is_error = this.redditService.handleError(error, this.is_error),
+    	this.handleResponse(this.response, this.is_error)
+    )};
 
 }
 
-	public handleResponse(this.response.data){
+	public handleResponse(this.response.data, this.is_error){
+	if (this.is_error === true){
+		console.log("Couldn't find it");
+	}
+		console.log("Response:",this.response.data);
 		for (this.id = 0; this.id < this.response.data.children.length; this.id++){
 				this.record = this.response.data.children[this.id].data;
                 this.raw_created = this.record.created;
@@ -61,5 +65,6 @@ export class AppComponent {
                 };
                 console.log("Record #",this.id+1,":",this.record);
 	}
+	}
 }
-}
+

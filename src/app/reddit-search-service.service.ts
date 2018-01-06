@@ -19,13 +19,13 @@ private response: any;
         .do(data=>{
           this.response = data.json();
           //console.log("In service:", this.response);
-        })
-        .catch(this.handleError);
+        });
   }
 
-  private handleError(err: HttpErrorResponse) {
-    console.error("Error is:", err.message);
-    return Observable.throw(err.message);
+  private handleError(err, is_error) {
+    console.error("Error is:", err);
+    is_error = true;
+    return is_error;
   }
 
 }
