@@ -2,16 +2,24 @@
   "name": "reddit-feed-web-app",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "app.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
+  "engines:": {
+    "node": "~8.9.4",
+    "npm": "~5.6.0"
+  },
   "dependencies": {
+    "@angular/cli": "1.6.3",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
@@ -22,6 +30,7 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "core-js": "^2.4.1",
+    "express": "^4.16.2",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
