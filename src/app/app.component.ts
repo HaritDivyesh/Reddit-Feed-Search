@@ -38,19 +38,29 @@ export class AppComponent {
   	this.redditService.searchSubreddit(numposts, this.subreddit).subscribe(data => {
       this.response = data.json();
       //console.log("In searchsubreddit:", this.response);
-      this.handleResponse(this.response, this.is_error);
+      this.is_error = false;
+      this.handleResponse(this.response, false);
     }, error => {(
     	this.is_error = this.redditService.handleError(error, this.is_error),
-    	this.handleResponse(this.response, this.is_error)
+    	this.handleError(this.response)
     )});
 
 }
+
+  public handleError(temp_response){
+    this.redditService.errorAsynCall(this.subreddit).subscribe(data => {
+      this.response = data.json();
+      //console.log("Handleerror mein aya");
+      //console.log("In searchsubreddit:", this.response);
+      this.handleResponse(this.response, true);
+    });
+  }
 
   public searchrandom(){
     this.chosen_numposts = this.random_numposts[Math.floor(Math.random() * this.random_numposts.length)];
     this.chosen_srname = this.random_srname[Math.floor(Math.random() * this.random_srname.length)];
     this.isClicked = true;
-    console.log(this.isClicked);
+    //console.log(this.isClicked);
     this.searchsubreddit(this.chosen_numposts, this.chosen_srname);
   }
 
@@ -58,7 +68,8 @@ export class AppComponent {
 	public handleResponse(temp_response, temp_is_error){
     this.all_records = [];
     this.record = [];
-  	if (this.is_error){
+    //console.log("Handle Response mein error:", temp_is_error);
+  	if (temp_is_error){
       return;
   	}
    
