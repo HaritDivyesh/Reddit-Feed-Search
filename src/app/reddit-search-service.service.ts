@@ -30,7 +30,7 @@ private response: any;
 
   public errorAsynCall(srname):Observable<any>{
     //console.log("Async mein aya");
-    return this.http.get("https://www.reddit.com/search.json?q="+srname+"&sort=old&limit=10")
+    return this.http.get("https://www.reddit.com/search.json?q="+srname+"&sort=top&limit=10")
         .do(data=>{
           this.response = data.json();
           //console.log("In service:", this.response);

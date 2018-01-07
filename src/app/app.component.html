@@ -41,7 +41,7 @@
         <div class="form-group col-xs-12" style="text-align:center">
           <h3><b>Randomize my search!</b></h3>
             <button type="button" (click)="searchrandom()" class="btn btn-primary btn-block lookup-button default-posts">
-              <i class="fa fa-cog fa-spin -o fa-fw"></i><span class="sr-only"></span> Randomize!</button><br/><br/>
+              <i class="fa fa-cog fa-spin -o fa-fw"></i><span class="sr-only"></span> I'm feeling lucky!</button><br/><br/>
               <h4 *ngIf = "isClicked"><b>Posts: {{chosen_numposts}}</b></h4>
               <h4 *ngIf = "isClicked"><b>Subreddit: {{chosen_srname}}</b></h4>
         </div>
@@ -50,9 +50,13 @@
 </div>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <hr>
-    <div *ngIf = "is_error" class="alert alert-danger alert-dismissible" role="alert">
+    <div *ngIf = "is_error" class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <b>Sorry, no such subreddit exists. Please try a choice above, or select a random one from a dozen choices.</b>
+            <b>Sorry, no such subreddit exists. Please try a predefined choice above, or select a random one from our dozen choices!</b>
+    </div>
+    <div *ngIf = "all_records.length < numposts.value" class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <b>It appears this isn't a big subreddit. Please choose a more popular one if you'd like to see more results.</b>
     </div>
     <div *ngIf = "all_records.length>0" class="list-group">
           <a href = "#" class = "list-group-item active result-header">
@@ -62,15 +66,16 @@
           </a>
 
     <div *ngFor = "let record of all_records" class="top-posts">
-          <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+          
               <div class="d-flex w-100 justify-content-between">
+                <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
                  <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
                   <h3 class="mb-1">{{record.title}}</h3>
                   <p><small>Created on {{record.created_at}}, by {{record.author}}</small></p>
                   <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span><b> {{record.score}}&nbsp;&nbsp;</b>
-                  <span class="fa fa-comment-o"></span><b> {{record.comments}}</b>
-              </div>
-          </a>
+                  <span class="fa fa-comment-o"></span><b> {{record.comments}}</b></a></div>
+                  <a href="https://reddit.com{{record.permalink}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start"><h4>Link to original post</h4></a>
+              
       </div><br/>
     </div>
 </div><br/>

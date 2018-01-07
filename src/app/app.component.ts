@@ -72,7 +72,7 @@ export class AppComponent {
   	if (temp_is_error){
       return;
   	}
-   
+   //console.log(temp_response.data.children[0].data); //TODO: Get permalink for post, display below link
 		for (this.id = 0; this.id < temp_response.data.children.length; this.id++){
 				this.record = temp_response.data.children[this.id].data;
         if (this.record.thumbnail === "" || this.record.thumbnail === "self" || this.record.thumbnail === "default"
@@ -93,7 +93,8 @@ export class AppComponent {
             'edited_at':this.edited_at_date.toDateString(),
             'thumbnail': this.record.thumbnail,
             'score': this.record.score,
-            'comments': this.record.num_comments
+            'comments': this.record.num_comments,
+            'permalink': this.record.permalink
         };
         this.all_records.push(this.record);
 	}
