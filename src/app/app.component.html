@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" style="overflow:auto">
   <div style="text-align:center">
     <br/><br/>
     <img src="assets/reddit_thumbnail.png" width="150" height="150">
@@ -7,8 +7,8 @@
       Reddit Feed Search
     </h1><hr>
   </div>
-  <div>
-    <div class="col-xs-4">
+  <div id="wrapper">
+    <div class="col-xs-4 predefined-selection">
       <form class="input-form">
         <div class="form-group col-xs-12" style="text-align:center">
           <h3><b>Choose any one:</b></h3>
@@ -20,7 +20,7 @@
         </div>
       </form>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-4 custom-selection">
       <form class="input-form">
         <div class="form-group col-xs-12" style="text-align:center">
           <h3><b>Customize my search!</b></h3>
@@ -36,7 +36,7 @@
         </div>
       </form>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-4 random-selection">
       <form class="input-form">
         <div class="form-group col-xs-12" style="text-align:center">
           <h3><b>Randomize my search!</b></h3>
@@ -47,14 +47,13 @@
         </div>
       </form>
     </div><hr>
-</div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
     <hr>
-    <div *ngIf = "is_error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div *ngIf = "is_error" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <b>Sorry, no such subreddit exists. Please try a predefined choice above, or select a random one from our dozen choices!</b>
     </div>
-    <div *ngIf = "all_records.length < numposts.value" class="alert alert-warning alert-dismissible" role="alert">
+    <div *ngIf = "(all_records.length < numposts.value && is_error == false) " class="alert alert-warning alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <b>It appears this isn't a big subreddit. Please choose a more popular one if you'd like to see more results.</b>
     </div>

@@ -30,3 +30,13 @@
 	width: 200px;
 	display: inline-block;
 }
+
+#wrapper {
+  display: flex;    /* Magic begins */
+  flex-wrap: wrap;  /* Allow multiple lines */
+}
+#wrapper > div {
+  flex: 1;          /* Distribute space equally among the flex items */
+  min-width: 300px; /* But force them to be at least300px wide */
+  border: 0px;
+}
