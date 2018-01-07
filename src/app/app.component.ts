@@ -34,7 +34,7 @@ export class AppComponent {
 
   public searchsubreddit(numposts, srname){
   	this.subreddit = srname;
-
+    
     //Call service for this subreddit
   	this.redditService.searchSubreddit(numposts, this.subreddit).subscribe(data => {
       this.response = data.json();
