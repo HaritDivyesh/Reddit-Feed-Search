@@ -1,5 +1,6 @@
 
 <div class="container" style="overflow:auto">
+
   <div style="text-align:center">
     <br/><br/>
     <img src="assets/reddit_thumbnail.png" width="150" height="150">
@@ -7,6 +8,7 @@
       Reddit Feed Search
     </h1><hr>
   </div>
+
   <div id="wrapper">
     <div class="col-xs-4 predefined-selection">
       <form class="input-form">
@@ -16,10 +18,11 @@
           <button type="button" (click)="searchsubreddit(10, 'music')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-music" aria-hidden="true"></i></span> Music</button>
           <button type="button" (click)="searchsubreddit(10, 'movies')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-film" aria-hidden="true"></i></span> Movies</button>
           <button type="button" (click)="searchsubreddit(10, 'news')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> News</button>
-          <button type="button" (click)="searchsubreddit(10, 'videos')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-file-video-o" aria-hidden="true"></i></span> Videos</button>
+          <button type="button" (click)="searchsubreddit(10, 'videos')" class="btn btn-primary btn-block lookup-button default-posts"><span><i class="fa fa-video-camera" aria-hidden="true"></i></span> Videos</button>
         </div>
       </form>
     </div>
+
     <div class="col-xs-4 custom-selection">
       <form class="input-form">
         <div class="form-group col-xs-12" style="text-align:center">
@@ -36,6 +39,7 @@
         </div>
       </form>
     </div>
+
     <div class="col-xs-4 random-selection">
       <form class="input-form">
         <div class="form-group col-xs-12" style="text-align:center">
@@ -47,34 +51,36 @@
         </div>
       </form>
     </div><hr>
-    </div>
-    <hr>
-    <div *ngIf = "is_error" class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <b>Sorry, no such subreddit exists. Please try a predefined choice above, or select a random one from our dozen choices!</b>
-    </div>
-    <div *ngIf = "(all_records.length < numposts.value && is_error == false) " class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <b>It appears this isn't a big subreddit. Please choose a more popular one if you'd like to see more results.</b>
-    </div>
-    <div *ngIf = "all_records.length>0" class="list-group">
-          <a href = "#" class = "list-group-item active result-header">
-              <h4 class = "list-group-item-heading">
-                  Search results
-              </h4>
-          </a>
 
+  </div><hr>
+  <div *ngIf = "is_error" class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <b>Sorry, no such subreddit exists. Please try a predefined choice above, or select a random one from our dozen choices!</b>
+  </div>
+
+  <div *ngIf = "(all_records.length < numposts.value && is_error == false) " class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <b>Fewer posts received than requested. One possible reason could be that this isn't a big subreddit. Please choose a more popular one if you'd like to see more results.</b>
+  </div>
+
+  <div *ngIf = "all_records.length>0" class="list-group">
+    <a href = "#" class = "list-group-item active result-header">
+        <h4 class = "list-group-item-heading">
+            Search results
+        </h4>
+    </a>
     <div *ngFor = "let record of all_records" class="top-posts">
-          
-              <div class="d-flex w-100 justify-content-between">
-                <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
-                 <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
-                  <h3 class="mb-1">{{record.title}}</h3>
-                  <p><small>Created on {{record.created_at}}, by {{record.author}}</small></p>
-                  <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span><b> {{record.score}}&nbsp;&nbsp;</b>
-                  <span class="fa fa-comment-o"></span><b> {{record.comments}}</b></a></div>
-                  <a href="https://reddit.com{{record.permalink}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start"><h4>Link to original post</h4></a>
-              
-      </div><br/>
-    </div>
+      <div class="d-flex w-100 justify-content-between">
+        <a href="{{record.url}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+          <img src="{{record.thumbnail}}" class="img-circle" width="70" height="70">
+          <h3 class="mb-1">{{record.title}}</h3>
+          <p><small>Created on {{record.created_at}}, by {{record.author}}</small></p>
+          <span class="move-span-up"><img src="assets/upvote.png" width="15" height="12"></span><b> {{record.score}}&nbsp;&nbsp;</b>
+          <span class="fa fa-comment-o"></span><b> {{record.comments}}</b>
+        </a>
+      </div>
+    <a href="https://reddit.com{{record.permalink}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start"><h4>Link to original post</h4>
+    </a>
+    </div><br/>
+  </div>
 </div><br/>

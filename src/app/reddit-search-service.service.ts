@@ -1,40 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 @Injectable()
 export class RedditSearchServiceService {
 
 private response: any;
+constructor(private http: Http) { }
 
-  constructor(private http: Http) { }
+public searchSubreddit(numposts, srname):Observable<any>{
+      //call reddit's API for this subreddit and chosen name
+      return this.http.get("https://www.reddit.com/r/"+srname+"/top/.json?limit="+numposts)
+      .do(data=>{
+        this.response = data.json();
+      });
+}
 
-  public searchSubreddit(numposts, srname):Observable<any>{
-        return this.http.get("https://www.reddit.com/r/"+srname+"/top/.json?limit="+numposts)
-        .do(data=>{
-          this.response = data.json();
-          //console.log("In service:", this.response);
-        });
-  }
+public errorAsynCall(srname):Observable<any>{
+  /*called if error is received, try the search feature if it gives any results instead of
+  looking for the actual subreddit. If we still don't get anything, show the error.*/
+  return this.http.get("https://www.reddit.com/search.json?q="+srname+"&sort=top&limit=10")
+      .do(data=>{
+        this.response = data.json();
+      });
+ }
 
-  public handleError(err, is_error) {
-    console.error("Error is:", err);
-    is_error = true;
-    return is_error; 
-  }
-
-  public errorAsynCall(srname):Observable<any>{
-    //console.log("Async mein aya");
-    return this.http.get("https://www.reddit.com/search.json?q="+srname+"&sort=top&limit=10")
-        .do(data=>{
-          this.response = data.json();
-          //console.log("In service:", this.response);
-        });
-  }
+ public handleError(err, is_error) {
+  /*when all else fails, return error to component, which breaks the execution
+  and displays error*/
+  console.error("Error is:", err);
+  is_error = true;
+  return is_error; 
+}
 
 }
