@@ -4,7 +4,7 @@
 
 ## Development environment
 
-The application was developed in Angular using Angular CLI(https://github.com/angular/angular-cli) v1.6.3, Node v8.9.4 and Express.js v4.16.2.
+The application was developed in Angular using [Angular CLI](https://github.com/angular/angular-cli) v1.6.3, Node v8.9.4 and Express.js v4.16.2.
 
 ## Installation
 
@@ -17,13 +17,13 @@ The application was developed in Angular using Angular CLI(https://github.com/an
 This can be done in two ways:
 
 1. Using Angular CLI:
-	i. ng serve
-	ii. Open localhost:4000 in a browser
+	1. ng serve
+	2. Open localhost:4200 in a browser
 
 2. Using Node:
-	i. ng build
-	ii. node app.js
-	iii. Open localhost:3001 in a browser
+	1. ng build
+	2. node app.js
+	3. Open localhost:3001 in a browser
 
 ## Application features
 
@@ -38,10 +38,10 @@ There are various types of search queries avaiable:
 The posts thus displayed have the following clickable items:
 
 1. Link to the post. This has the following properties:
-	i. Image. If there's no image avaiable("self", "default", "spolier" etc. posts), a reddit image is displayed.
-	ii. Title.
-	iii. Creation date.
-	iv. Name of OP.
+	1. Image. If there's no image avaiable("self", "default", "spolier" etc. posts), a reddit image is displayed.
+	2. Title.
+	3. Creation date.
+	4. Name of OP.
 2. Link to the actual reddit thread with the comments (Same as 1 for self posts).
 
 There are errors and warning displays when queried for a non-existing subreddit, and when the number of posts available is less than requested, respectively.
